@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1715652719946285548}
   - component: {fileID: 4377276293919579724}
   - component: {fileID: 1781673759360823170}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,9 +83,9 @@ GameObject:
   - component: {fileID: 6308221962410833159}
   - component: {fileID: 3011541535195676854}
   - component: {fileID: 6557946537676325441}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_03
-  m_TagString: Untagged
+  m_TagString: EnemyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
