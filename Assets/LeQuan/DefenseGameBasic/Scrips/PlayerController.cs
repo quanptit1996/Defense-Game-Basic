@@ -66,7 +66,6 @@ namespace LQ.DefenseBasic
         private void ResetAtkAnim()
         {
             if (IsComponentsNull()) return;
-
             _anim.SetBool(Const.ATTACK_ANIM, false);
 
         }
