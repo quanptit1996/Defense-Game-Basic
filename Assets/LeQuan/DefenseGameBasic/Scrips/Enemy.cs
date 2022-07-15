@@ -14,12 +14,14 @@ namespace LQ.DefenseBasic
         private Rigidbody2D _rb;
         private PlayerController _player;
         private bool _isDead;
+        private GameManager _gm;
 
         private void Awake()
         {
             _anim = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
             _player = FindObjectOfType<PlayerController>();
+            _gm = FindObjectOfType<GameManager>();
         }
 
         
@@ -53,13 +55,19 @@ namespace LQ.DefenseBasic
 
         public void Die()
         {
-            if (IsComponentsNull()) return;
+            if (IsComponentsNull() || _isDead) return;
             if (!_isDead)
             {
                 _anim.SetTrigger(Const.DEAD_ANIM);
                 _rb.velocity = Vector2.zero;
                 gameObject.layer = LayerMask.NameToLayer(Const.DEAD_LAYER);
                 _isDead = true;
+                if (_gm)
+                {
+                    _gm.Score ++;
+                }
+                
+                Destroy(gameObject,2f);
             }
         }
     }

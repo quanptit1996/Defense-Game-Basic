@@ -15,7 +15,7 @@ namespace LQ.DefenseBasic
 
         public const string DEAD_LAYER = "Dead";
 
-        public const string BEST_SCORE_PREFT = "best_score";
+        public const string BEST_SCORE_PREF = "best_score";
         public const string PLAYER_PREFIX_PREF = "player_";
 
         public const string CUR_PLAYER_ID_PREF = "cur_player_id";

@@ -56,6 +56,7 @@ namespace LQ.DefenseBasic
             if (col.CompareTag(Const.ENEMY_WEAPON_TAG) && !_isDedad)
             {
                 _anim.SetTrigger(Const.DEAD_ANIM);
+                gameObject.layer = LayerMask.NameToLayer(Const.DEAD_LAYER);
                 _isDedad = true;
             }
         }
