@@ -67,6 +67,15 @@ namespace LQ.DefenseBasic
         {
             return guiManager == null;
         }
+
+        public void GameOver()
+        {
+            if(_isGameOver) return;
+            _isGameOver = false;
+
+            Pref.bestScore = _score;
+            if(guiManager._gameOverDialog) guiManager._gameOverDialog.ShowHide(true);
+        }
     }
 }
 

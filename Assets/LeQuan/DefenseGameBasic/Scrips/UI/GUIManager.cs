@@ -6,9 +6,9 @@ using TMPro;
 
 public class GUIManager : MonoBehaviour
 {
+    public Dialog _gameOverDialog;
     [SerializeField] private GameObject homeGUI;
     [SerializeField] private GameObject gameGUI;
-    [SerializeField] private Dialog _gameOverDialog;
     [SerializeField] private TextMeshProUGUI mainCoinTxt;
     [SerializeField] private TextMeshProUGUI gameplayCointTxt;
 

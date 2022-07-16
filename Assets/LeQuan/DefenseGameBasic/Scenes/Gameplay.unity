@@ -1260,9 +1260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ad3a572851a4138af11416caf20b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameOverDialog: {fileID: 1881743132}
   homeGUI: {fileID: 110192007}
   gameGUI: {fileID: 891071044}
-  _gameOverDialog: {fileID: 0}
   mainCoinTxt: {fileID: 125326167}
   gameplayCointTxt: {fileID: 318859104}
 --- !u!4 &172309738
@@ -1308,12 +1308,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b489f798ab84502af65095bc24262e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guiManager: {fileID: 172309737}
   spawnTime: 2
   _enemyPrefabs:
   - {fileID: 3385322856895525779, guid: 19a49d29adb107e46a973b191a1e547c, type: 3}
   - {fileID: 5743961527443234841, guid: 93418e6f06399314286e5e812889cd58, type: 3}
   - {fileID: 6358214136268163503, guid: d6888f79c5cce2c43b336ca93135eb53, type: 3}
-  guiManager: {fileID: 172309737}
+  btn_PlayGame: {fileID: 1490676523}
 --- !u!4 &256306656
 Transform:
   m_ObjectHideFlags: 0
@@ -1839,7 +1840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3335,7 +3336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &891071045
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6213,13 +6214,14 @@ GameObject:
   - component: {fileID: 1881743129}
   - component: {fileID: 1881743131}
   - component: {fileID: 1881743130}
+  - component: {fileID: 1881743132}
   m_Layer: 5
   m_Name: GameOverDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1881743129
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6281,6 +6283,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881743128}
   m_CullTransparentMesh: 1
+--- !u!114 &1881743132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881743128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2032a705209f548a4865197f6902195a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titileTxt: {fileID: 0}
+  contentTxt: {fileID: 0}
+  bestScore: {fileID: 50812450}
+  btn_Quit: {fileID: 1372456825}
+  btn_RePlay: {fileID: 2044103528}
 --- !u!1 &1882864689
 GameObject:
   m_ObjectHideFlags: 0

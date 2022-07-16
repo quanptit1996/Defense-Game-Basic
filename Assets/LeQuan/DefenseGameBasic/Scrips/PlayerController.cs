@@ -14,11 +14,13 @@ namespace LQ.DefenseBasic
         private bool _isAttacked;
         private bool _isDedad;
         private IComponentChecking _componentCheckingImplementation;
+        private GameManager _gm;
 
         private void Awake()
         {
             _anim = GetComponent<Animator>();
             _currentAtkRate = atkRate;
+            _gm = FindObjectOfType<GameManager>();
         }
 
         // Start is called before the first frame update
@@ -58,6 +60,7 @@ namespace LQ.DefenseBasic
                 _anim.SetTrigger(Const.DEAD_ANIM);
                 gameObject.layer = LayerMask.NameToLayer(Const.DEAD_LAYER);
                 _isDedad = true;
+                _gm.GameOver();
             }
         }
 
@@ -72,7 +75,7 @@ namespace LQ.DefenseBasic
 
         public bool IsComponentsNull()
         {
-            return _anim == null;
+            return _anim == null || _gm == null;
         }
     }
 }
