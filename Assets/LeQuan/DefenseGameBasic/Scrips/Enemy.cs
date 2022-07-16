@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 namespace LQ.DefenseBasic
 {
@@ -10,6 +12,8 @@ namespace LQ.DefenseBasic
     {
         [SerializeField] private float speed;
         [SerializeField] private float atkDistance;
+        [SerializeField] private int minCoinsBonus;
+        [SerializeField] private int maxCoinsBonus;
         private Animator _anim;
         private Rigidbody2D _rb;
         private PlayerController _player;
@@ -50,7 +54,7 @@ namespace LQ.DefenseBasic
 
         public bool IsComponentsNull()
         {
-            return _anim == null || _rb == null || _player == null;
+            return _anim == null || _rb == null || _player == null || _gm == null;
         }
 
         public void Die()
@@ -62,12 +66,14 @@ namespace LQ.DefenseBasic
                 _rb.velocity = Vector2.zero;
                 gameObject.layer = LayerMask.NameToLayer(Const.DEAD_LAYER);
                 _isDead = true;
-                if (_gm)
-                {
-                    _gm.Score ++;
-                }
+
+                _gm.Score++;
+                int bonus = Random.Range(minCoinsBonus, maxCoinsBonus);
+                Pref.coins += bonus;
                 
-                Destroy(gameObject,2f);
+                if(_gm.guiManager) _gm.guiManager.UpdateGameplayCoins(); 
+                
+                Destroy(gameObject, 2f);
             }
         }
     }

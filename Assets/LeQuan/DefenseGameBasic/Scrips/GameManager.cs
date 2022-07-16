@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LQ.DefenseBasic
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour,IComponentChecking
     {
+        public GUIManager guiManager;
+        
         [SerializeField] private float spawnTime;
         [SerializeField] private Enemy [] _enemyPrefabs;
+        [SerializeField] private Button btn_PlayGame;
+        
 
         private bool _isGameOver;
 
@@ -21,7 +26,18 @@ namespace LQ.DefenseBasic
         // Start is called before the first frame update
         void Start()
         {
+            if(IsComponentsNull()) return;
+            
+            guiManager.ShowGameGUI(false);
+            guiManager.UpdateMainCoins();
+            btn_PlayGame.onClick.AddListener(PlayGame);
+        }
+
+        void PlayGame()
+        {
+            guiManager.ShowGameGUI(true);
             StartCoroutine(SpawnEnemy());
+            guiManager.UpdateGameplayCoins();
         }
 
         // Update is called once per frame
@@ -45,6 +61,11 @@ namespace LQ.DefenseBasic
                 }
                 yield return new WaitForSeconds(spawnTime);
             }
+        }
+
+        public bool IsComponentsNull()
+        {
+            return guiManager == null;
         }
     }
 }
