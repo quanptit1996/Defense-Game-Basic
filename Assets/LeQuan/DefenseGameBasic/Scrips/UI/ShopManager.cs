@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] private ShopItem[] items;
+    public ShopItem[] items;
     // Start is called before the first frame update
     void Start()
     {
