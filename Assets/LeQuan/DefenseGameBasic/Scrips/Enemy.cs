@@ -70,8 +70,8 @@ namespace LQ.DefenseBasic
                 _gm.Score++;
                 int bonus = Random.Range(minCoinsBonus, maxCoinsBonus);
                 Pref.coins += bonus;
-                
-                if(_gm.guiManager) _gm.guiManager.UpdateGameplayCoins(); 
+
+                if (_gm.guiManager) _gm.guiManager.UpdateGameplayCoins();
                 
                 Destroy(gameObject, 2f);
             }
