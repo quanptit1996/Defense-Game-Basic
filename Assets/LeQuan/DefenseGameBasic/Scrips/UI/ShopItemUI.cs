@@ -9,7 +9,7 @@ public class ShopItemUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI priceTxt;
     [SerializeField] private Image hud;
-    [SerializeField] private Button btnBuy;
+    public Button btnBuy;
 
     public void UpdateUI(ShopItem item,int itemIndex)
     {

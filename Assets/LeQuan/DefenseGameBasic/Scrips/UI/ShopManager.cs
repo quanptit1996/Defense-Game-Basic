@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using LQ.DefenseBasic;
@@ -5,8 +6,21 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
+    public static ShopManager Instance { get; private set; }
+
     public ShopItem[] items;
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) 
+        {
+            Destroy(this.gameObject);
+        }
+ 
+        Instance = this;
+       // DontDestroyOnLoad( this.gameObject );
+    }
+
     void Start()
     {
         Init();

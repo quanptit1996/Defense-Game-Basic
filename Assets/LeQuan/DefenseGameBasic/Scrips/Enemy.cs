@@ -18,14 +18,14 @@ namespace LQ.DefenseBasic
         private Rigidbody2D _rb;
         private PlayerController _player;
         private bool _isDead;
-        private GameManager _gm;
+        
 
         private void Awake()
         {
             _anim = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
             _player = FindObjectOfType<PlayerController>();
-            _gm = FindObjectOfType<GameManager>();
+            
         }
 
         
@@ -54,7 +54,7 @@ namespace LQ.DefenseBasic
 
         public bool IsComponentsNull()
         {
-            return _anim == null || _rb == null || _player == null || _gm == null;
+            return _anim == null || _rb == null || _player == null;
         }
 
         public void Die()
@@ -67,12 +67,14 @@ namespace LQ.DefenseBasic
                 gameObject.layer = LayerMask.NameToLayer(Const.DEAD_LAYER);
                 _isDead = true;
 
-                _gm.Score++;
+                GameManager.Instance.Score++;
                 int bonus = Random.Range(minCoinsBonus, maxCoinsBonus);
                 Pref.coins += bonus;
 
-                if (_gm.guiManager) _gm.guiManager.UpdateGameplayCoins();
+                GUIManager.Instance.UpdateGameplayCoins();
                 
+                AudioController.Instance.PlaySound(AudioController.Instance.enemyDead);
+                    
                 Destroy(gameObject, 2f);
             }
         }

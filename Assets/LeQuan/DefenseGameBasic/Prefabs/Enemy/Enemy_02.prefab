@@ -167,8 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   atkDistance: 2.1
-  minCoinsBonus: 9
-  maxCoinsBonus: 14
+  minCoinsBonus: 30
+  maxCoinsBonus: 40
 --- !u!1 &807911386512343075
 GameObject:
   m_ObjectHideFlags: 0

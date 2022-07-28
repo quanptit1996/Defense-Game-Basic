@@ -1,49 +1,79 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace LQ.DefenseBasic
 {
-    public class GameManager : MonoBehaviour,IComponentChecking
+    public class GameManager : MonoBehaviour, IComponentChecking
     {
-        public GUIManager guiManager;
-        
+        public static GameManager Instance { get; private set; }
+
         [SerializeField] private float spawnTime;
-        [SerializeField] private Enemy [] _enemyPrefabs;
+        [SerializeField] private Enemy[] _enemyPrefabs;
         [SerializeField] private Button btn_PlayGame;
         
+        
+        private PlayerController _curPlayer;
 
         private bool _isGameOver;
 
         private int _score;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this) 
+            {
+                Destroy(this.gameObject);
+            }
+ 
+            Instance = this;
+          //  DontDestroyOnLoad( this.gameObject );
+        }
 
         public int Score
         {
             get => _score;
             set => _score = value;
         }
-        // Start is called before the first frame update
+
         void Start()
         {
-            if(IsComponentsNull()) return;
-            
-            guiManager.ShowGameGUI(false);
-            guiManager.UpdateMainCoins();
+            if (IsComponentsNull()) return;
+
+            GUIManager.Instance.ShowGameGUI(false);
+            GUIManager.Instance.UpdateMainCoins();
             btn_PlayGame.onClick.AddListener(PlayGame);
         }
 
         void PlayGame()
         {
-            guiManager.ShowGameGUI(true);
+            if(IsComponentsNull()) return;
+                
+            ActivePlayer();
+            GUIManager.Instance.ShowGameGUI(true);
             StartCoroutine(SpawnEnemy());
-            guiManager.UpdateGameplayCoins();
+            GUIManager.Instance.UpdateGameplayCoins();
+            AudioController.Instance.PlayBGMusic();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void ActivePlayer()
         {
-        
+            if (IsComponentsNull()) return;
+
+            if (_curPlayer)
+            {
+                Destroy(_curPlayer.gameObject);
+            }
+
+            var shopItems = ShopManager.Instance.items;
+            if (shopItems == null || shopItems.Length <= 0) return;
+
+            var newPlayerPrefab = shopItems[Pref.curPlayerId].playerPrefab;
+            if (newPlayerPrefab)
+                Instantiate(newPlayerPrefab, new Vector3(-7, 0, 0), Quaternion.identity);
         }
 
         IEnumerator SpawnEnemy()
@@ -56,7 +86,7 @@ namespace LQ.DefenseBasic
                     Enemy enemyPrefabs = _enemyPrefabs[randomEnemy];
                     if (enemyPrefabs)
                     {
-                        Instantiate(enemyPrefabs, new Vector3(8, 0, 0), Quaternion.identity);
+                        Instantiate(enemyPrefabs, new Vector3(8, 2, 0), Quaternion.identity);
                     }
                 }
                 yield return new WaitForSeconds(spawnTime);
@@ -65,16 +95,16 @@ namespace LQ.DefenseBasic
 
         public bool IsComponentsNull()
         {
-            return guiManager == null;
+            return GUIManager.Instance == null;
         }
 
         public void GameOver()
         {
             if(_isGameOver) return;
-            _isGameOver = false;
+            _isGameOver = true;
 
             Pref.bestScore = _score;
-            if(guiManager._gameOverDialog) guiManager._gameOverDialog.ShowHide(true);
+            if(GUIManager.Instance._gameOverDialog) GUIManager.Instance._gameOverDialog.ShowHide(true);
         }
     }
 }
